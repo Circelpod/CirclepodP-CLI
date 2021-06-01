@@ -8,6 +8,7 @@ use std::env;
 use structopt::StructOpt;
 
 mod create_spl_account;
+mod create_spl_token;
 
 fn main() {
     let mut builder = Builder::from_default_env();
@@ -18,6 +19,10 @@ fn main() {
 
     if args.pattern == "create-spl-account" {
         create_spl_account::main();
+    }
+
+    if args.pattern == "create_spl_token" {
+        create_spl_token::main();
     }
 
     info!("success!");
