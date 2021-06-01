@@ -1,0 +1,29 @@
+[package]
+name = "cp-cli"
+version = "0.1.0"
+authors = ["yasuoyuhao <yasuoyuhao@klearthink.com>"]
+edition = "2018"
+license = "MIT OR Apache-2.0"
+description = "Circlepod Protocol CLI"
+readme = "README.md"
+homepage = "https://github.com/you/grrs"
+repository = "https://github.com/you/grrs"
+keywords = ["cli", "search", "demo"]
+categories = ["command-line-utilities"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+structopt = "0.3.21"
+indicatif = "0.16.2"
+log = "0.4.14"
+env_logger = "0.8.3"
+solana-sdk = "1.6.10"
+solana-client = "1.6.10"
+solana-cli-config = "1.6.10"
+spl-token = { version = "3.1.0", features = ["no-entrypoint"] }
+
+[dev-dependencies]
+assert_cmd = "1.0.4"
+predicates = "1.0.8"
+tempfile = "3.2.0"
