@@ -2,6 +2,8 @@
 
 ## Create SPL Account
 
+This effect is equivalent to [`spl-token create-account`](https://spl.solana.com/token)
+
 > How to use spl-token library and rust code to create SPL Token Account?
 
 > If you want to use spl-token library and rust code to create SPL Token Account, please refer to the following code(SPL Token has been created)
@@ -20,6 +22,8 @@ ADDRESS	TOKEN	CHANGE	POST BALANCE
 EADJPCufGrM8KoVLdz89qu7WGC3zT4kcaR4rJH8F44Et MFE51guQQyixqGVFqQxijW667RzpriU3gabiFV6TmCG 0	0 tokens
 
 ## Create SPL Token Mint
+
+This effect is equivalent to [`spl-token create-token`](https://spl.solana.com/token)
 
 > How to use spl-token library and rust code to create SPL Token?
 
