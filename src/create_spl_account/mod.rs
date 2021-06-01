@@ -11,7 +11,7 @@ use std::str::FromStr;
 
 mod utils;
 
-const WORKSHOP_STICKER_2_MINT: &str = "8UPdrRe1FajsbHgpB6tgpghv8C3JmRvmjZMhrKDAK6aL";
+const MY_STICKER_MINT: &str = "MFE51guQQyixqGVFqQxijW667RzpriU3gabiFV6TmCG";
 
 pub fn main() {
     let my_keypair = utils::load_config_keypair();
@@ -23,7 +23,7 @@ pub fn main() {
     //   which fail to pay rent could be unintentionally destroyed.
     //
     // Doc hints:
-    //  - https://docs.rs/solana-client/1.5.8/solana_client/rpc_client/struct.RpcClient.html#method.get_minimum_balance_for_rent_exemption
+    //  - https://docs.rs/solana-client/1.6.10/solana_client/rpc_client/struct.RpcClient.html#method.get_minimum_balance_for_rent_exemption
     let token_account_size = spl_token::state::Account::LEN;
     let rpc_client = utils::new_rpc_client();
     let token_balance = rpc_client
@@ -61,7 +61,7 @@ pub fn main() {
     //
     // Doc hints:
     //  - https://docs.rs/spl-token/3.1.0/spl_token/instruction/fn.initialize_account.html
-    let sticker_token_mint = Pubkey::from_str(WORKSHOP_STICKER_2_MINT).unwrap();
+    let sticker_token_mint = Pubkey::from_str(MY_STICKER_MINT).unwrap();
     let initialize_account_instruction = initialize_account(
         &spl_token::ID,
         &new_token_pubkey,

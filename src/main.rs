@@ -7,7 +7,7 @@ use log::{debug, error, info, warn};
 use std::env;
 use structopt::StructOpt;
 
-mod create_spl;
+mod create_spl_account;
 
 fn main() {
     let mut builder = Builder::from_default_env();
@@ -16,8 +16,8 @@ fn main() {
     builder.init();
     let args = Cli::from_args();
 
-    if args.pattern == "create-spl" {
-        create_spl::main();
+    if args.pattern == "create-spl-account" {
+        create_spl_account::main();
     }
 
     info!("success!");
