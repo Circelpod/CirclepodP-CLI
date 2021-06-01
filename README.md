@@ -12,6 +12,7 @@ EADJPCufGrM8KoVLdz89qu7WGC3zT4kcaR4rJH8F44Et MFE51guQQyixqGVFqQxijW667RzpriU3gab
 
 ## Create SPL Token Mint
 
+> How to use spl-token library and rust code to create SPL Token?
 > If you want to use spl-token library and rust code to create SPL Token, please refer to the following code.
 > 如果你想使用 spl-token 庫與 Rust 代碼，創建 SPL Token，請參考以下原始碼
 > Example:
