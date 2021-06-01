@@ -6,25 +6,40 @@ use solana_sdk::{
     system_instruction::create_account,
     transaction::Transaction,
 };
-use spl_token::instruction::initialize_mint;
 use spl_token::instruction::initialize_account;
+use spl_token::instruction::initialize_mint;
 
 mod utils;
 
+// If you want to use spl-token library and rust code to create SPL Token, please refer to the following code.
+
 pub fn main() {
-
-    let new_token_keypair = Keypair::new(); // New random keypair
-    let new_token_pubkey = new_token_keypair.pubkey();
-
     let my_keypair = utils::load_config_keypair();
     let my_pubkey = my_keypair.pubkey();
 
-    let initialize_mint_instruction = initialize_mint(
-        &spl_token::id(),
-        &new_token_pubkey,
+    let token_account_size = spl_token::state::Mint::LEN;
+    let rpc_client = utils::new_rpc_client();
+    let token_balance = rpc_client
+        .get_minimum_balance_for_rent_exemption(token_account_size)
+        .expect("failed to get min balance");
+
+    let new_account_keypair = Keypair::new(); // New random keypair
+    let new_account_pubkey = new_account_keypair.pubkey();
+
+    let create_account_instruction = create_account(
         &my_pubkey,
-        Some(&my_pubkey),
-        32
+        &new_account_pubkey,
+        token_balance,
+        token_account_size as u64,
+        &spl_token::ID,
+    );
+
+    let initialize_mint_instruction = initialize_mint(
+        &spl_token::ID,
+        &new_account_pubkey,
+        &my_pubkey,
+        None,
+        6 as u8,
     )
     .unwrap();
 
@@ -34,9 +49,9 @@ pub fn main() {
         .expect("failed to get recent blockhash");
 
     let tx = Transaction::new(
-        &[&my_keypair],
+        &[&my_keypair, &new_account_keypair],
         Message::new(
-            &[initialize_mint_instruction],
+            &[create_account_instruction, initialize_mint_instruction],
             Some(&my_pubkey),
         ),
         recent_blockhash,
@@ -46,5 +61,6 @@ pub fn main() {
         .send_and_confirm_transaction_with_spinner(&tx)
         .expect("tx failed");
 
+    println!("Created Token Mint: {}", new_account_pubkey);
     println!("Transaction Signature: {}", utils::tx_signature(&tx));
 }
