@@ -13,7 +13,7 @@ mod utils;
 
 // If you want to use spl-token library and rust code to create SPL Token, please refer to the following code.
 
-pub fn main() {
+pub fn main(decimals: u8) {
     let my_keypair = utils::load_config_keypair();
     let my_pubkey = my_keypair.pubkey();
 
@@ -39,7 +39,7 @@ pub fn main() {
         &new_account_pubkey,
         &my_pubkey,
         None,
-        6 as u8,
+        decimals,
     )
     .unwrap();
 
